@@ -31,9 +31,229 @@ from typing import Callable, Iterable
 # For is_close:
 # $f(x) = |x - y| < 1e-2$
 
+# TODO: Implement for Task 0.1
 
-# TODO: Implement for Task 0.1.
+def add(x: float, y: float) -> float:
+    """
+    Add two floating point numbers.
 
+    Args:
+        x: First number
+        y: Second number
+
+    Returns:
+        Sum of x and y
+    """
+    return x + y
+
+
+def mul(x: float, y: float) -> float:
+    """
+    Multiply two floating point numbers.
+
+    Args:
+        x: First number
+        y: Second number
+
+    Returns:
+        Product of x and y
+    """
+    return x * y
+
+
+def id(x: float) -> float:
+    """
+    Identity function.
+
+    Args:
+        x: Input value
+
+    Returns:
+        Same value as input
+    """
+    return x
+
+
+def neg(x: float) -> float:
+    """
+    Negate a floating point number.
+
+    Args:
+        x: Number to negate
+
+    Returns:
+        Negative of input x
+    """
+    return -x
+
+
+def lt(x: float, y: float) -> float:
+    """
+    Less than comparison of two numbers.
+
+    Args:
+        x: First number
+        y: Second number
+
+    Returns:
+        1.0 if x < y, 0.0 otherwise
+    """
+    return float(x < y)
+
+
+def eq(x: float, y: float) -> float:
+    """
+    Equality comparison of two numbers.
+
+    Args:
+        x: First number
+        y: Second number
+
+    Returns:
+        1.0 if x == y, 0.0 otherwise
+    """
+    return float(x == y)
+
+
+def max(x: float, y: float) -> float:
+    """
+    Maximum of two numbers.
+
+    Args:
+        x: First number
+        y: Second number
+
+    Returns:
+        Larger value between x and y
+    """
+    return x if x > y else y
+
+
+def is_close(x: float, y: float) -> float:
+    """
+    Check if two numbers are close in value.
+
+    Args:
+        x: First number
+        y: Second number
+
+    Returns:
+        1.0 if absolute difference between x and y is less than 1e-2, 0.0 otherwise
+    """
+    return float(abs(x - y) < 1e-2)
+
+
+def sigmoid(x: float) -> float:
+    """
+    Sigmoid activation function.
+
+    Computes f(x) = 1/(1 + e^(-x)) if x >= 0 else e^x/(1 + e^x)
+
+    Args:
+        x: Input value
+
+    Returns:
+        Result of sigmoid function
+    """
+    if x >= 0:
+        return 1.0 / (1.0 + math.exp(-x))
+    else:
+        ex = math.exp(x)
+        return ex / (1.0 + ex)
+
+
+def relu(x: float) -> float:
+    """
+    Rectified Linear Unit (ReLU) function.
+
+    Args:
+        x: Input value
+
+    Returns:
+        x if x > 0, else 0
+    """
+    return max(0.0, x)
+
+
+def log(x: float) -> float:
+    """
+    Natural logarithm.
+
+    Args:
+        x: Input value
+
+    Returns:
+        Natural log of x
+    """
+    return math.log(x)
+
+
+def exp(x: float) -> float:
+    """
+    Exponential function.
+
+    Args:
+        x: Input value
+
+    Returns:
+        e raised to the power of x
+    """
+    return math.exp(x)
+
+
+def log_back(x: float, d: float) -> float:
+    """
+    Derivative of log function.
+
+    Args:
+        x: Input value
+        d: Derivative from chain rule
+
+    Returns:
+        d/x if x != 0, else 0
+    """
+    return d / x if x != 0 else 0.0
+
+
+def inv(x: float) -> float:
+    """
+    Multiplicative inverse (reciprocal).
+
+    Args:
+        x: Input value
+
+    Returns:
+        1/x if x != 0, else 0
+    """
+    return 1.0 / x if x != 0 else 0.0
+
+
+def inv_back(x: float, d: float) -> float:
+    """
+    Derivative of inverse function.
+
+    Args:
+        x: Input value
+        d: Derivative from chain rule
+
+    Returns:
+        -d/x^2 if x != 0, else 0
+    """
+    return -d / (x * x) if x != 0 else 0.0
+
+
+def relu_back(x: float, d: float) -> float:
+    """
+    Derivative of ReLU function.
+
+    Args:
+        x: Input value
+        d: Derivative from chain rule
+
+    Returns:
+        d if x > 0, else 0
+    """
+    return d if x > 0 else 0.0
 
 # ## Task 0.3
 

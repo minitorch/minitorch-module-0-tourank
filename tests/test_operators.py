@@ -8,20 +8,20 @@ from minitorch import MathTest
 import minitorch
 from minitorch.operators import (
     add,
-    addLists,
+    #addLists,
     eq,
     id,
     inv,
-    inv_back,
-    log_back,
+    #inv_back,
+    #log_back,
     lt,
     max,
     mul,
     neg,
-    negList,
-    prod,
+    #negList,
+    #prod,
     relu,
-    relu_back,
+    #relu_back,
     sigmoid,
 )
 
