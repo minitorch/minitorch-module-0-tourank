@@ -12,8 +12,8 @@ from minitorch.operators import (
     eq,
     id,
     inv,
-    #inv_back,
-    #log_back,
+    inv_back,
+    log_back,
     lt,
     max,
     mul,
@@ -21,7 +21,7 @@ from minitorch.operators import (
     #negList,
     #prod,
     relu,
-    #relu_back,
+    relu_back,
     sigmoid,
 )
 
@@ -99,17 +99,13 @@ def test_eq(a: float) -> None:
 
 
 @pytest.mark.task0_2
-@given(small_floats)
-def test_sigmoid(a: float) -> None:
-    """Check properties of the sigmoid function, specifically
-    * It is always between 0.0 and 1.0.
-    * one minus sigmoid is the same as sigmoid of the negative
-    * It crosses 0 at 0.5
-    * It is  strictly increasing.
-    """
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
-
+@given(small_floats, small_floats)
+def test_sigmoid(a: float, b: float) -> None:
+    assert sigmoid(a) >= 0.0 and sigmoid(a) <= 1.0
+    assert abs((1 - sigmoid(a)) - sigmoid(-a)) <= 1e-6  # approximate equality
+    assert sigmoid(0) == 0.5
+    if a < b - 1e-4:  # ensure minimum gap between a and b
+        assert sigmoid(a) < sigmoid(b)
 
 @pytest.mark.task0_2
 @given(small_floats, small_floats, small_floats)
