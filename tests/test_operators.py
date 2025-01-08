@@ -8,7 +8,7 @@ from minitorch import MathTest
 import minitorch
 from minitorch.operators import (
     add,
-    #addLists,
+    addLists,
     eq,
     id,
     inv,
@@ -18,8 +18,8 @@ from minitorch.operators import (
     max,
     mul,
     neg,
-    #negList,
-    #prod,
+    negList,
+    prod,
     relu,
     relu_back,
     sigmoid,
@@ -130,15 +130,14 @@ def test_distribute(x: float, y: float, z: float) -> None:
     r"""Write a test that ensures that your operators distribute, i.e.
     :math:`z \times (x + y) = z \times x + z \times y`
     """
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    assert abs(mul(z, (add(x,y))) - (add(mul(z,x) , mul(z,y)))) <= 1e-4
 
 
 @pytest.mark.task0_2
-def test_other() -> None:
-    """Write a test that ensures some other property holds for your functions."""
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+@given(small_floats)
+def test_other(x: float) -> None:
+    """Test that adding a number to its negative approximates zero"""
+    assert abs(add(x, neg(x))) <= 1e-4
 
 
 # ## Task 0.3  - Higher-order functions
@@ -165,8 +164,7 @@ def test_sum_distribute(ls1: List[float], ls2: List[float]) -> None:
     """Write a test that ensures that the sum of `ls1` plus the sum of `ls2`
     is the same as the sum of each element of `ls1` plus each element of `ls2`.
     """
-    # TODO: Implement for Task 0.3.
-    raise NotImplementedError("Need to implement for Task 0.3")
+    assert abs(sum(ls1) + sum(ls2) - sum(addLists(ls1, ls2))) <= 1e-4
 
 
 @pytest.mark.task0_3

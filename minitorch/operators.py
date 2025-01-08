@@ -271,4 +271,41 @@ def relu_back(x: float, d: float) -> float:
 # - prod: take the product of lists
 
 
-# TODO: Implement for Task 0.3.
+def map(fn: Callable[[float], float]) -> Callable[[Iterable[float]], Iterable[float]]:
+    def apply(ls: Iterable[float]):
+        ret = []
+        for x in ls:
+            ret.append(fn(x))
+        return ret
+    return apply
+
+def negList(ls: Iterable[float]) -> Iterable[float]:
+    return map(lambda x : -x)(ls)
+
+
+def zipWith(fn: Callable[[float, float], float], ls1: Iterable[float], ls2: Iterable[float]) -> Iterable[float]:
+    ret = []
+    for i in range(min(len(ls1), len(ls2))):
+        ret.append(fn(ls1[i], ls2[i]))
+    return ret    
+
+def addLists(ls1: Iterable[float], ls2: Iterable[float]) -> Iterable[float]:
+    return zipWith(lambda x,y: x+y, ls1, ls2)
+
+
+def reduce(fn: Callable[[float, float], float], ls: Iterable[float]) -> float:
+    it = iter(ls)  # Create iterator from the iterable
+    try:
+        acc = next(it)  # Get first element as initial accumulator
+    except StopIteration:
+        raise ValueError("reduce() of empty sequence")
+    
+    for x in it:  # Iterate over remaining elements
+        acc = fn(acc, x)  # Update accumulator
+    return acc 
+
+def sum(ls: Iterable[float]) -> float:
+    return reduce(lambda x, y: x+y, ls) if list(ls) else 0.0
+
+def prod(ls: Iterable[float]) -> float:
+    return reduce(lambda x, y: x*y, ls)
